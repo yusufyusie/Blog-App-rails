@@ -33,11 +33,11 @@ RSpec.describe Post, type: :model do
 
     subject do
       Post.new(
-          title: 'Test Post',
-          text: 'This is a test post',
-          user:,
-          comment_counter: 0,
-          likes_counter: 0
+        title: 'Test Post',
+        text: 'This is a test post',
+        user:,
+        comment_counter: 0,
+        likes_counter: 0
       )
     end
 
@@ -48,9 +48,9 @@ RSpec.describe Post, type: :model do
     it 'returns the five most recent comments' do
       10.times do |i|
         Comment.create(
-            text: "This is the text for comment #{i}",
-            post:,
-            user:
+          text: "This is the text for comment #{i}",
+          post:,
+          user:
         )
       end
 
