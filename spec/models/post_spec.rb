@@ -37,13 +37,13 @@ RSpec.describe Post, type: :model do
         user:,
         comment_counter: 0,
         likes_counter: 0
-      )
-    }
+      )}
+    end
+
     it 'increases the posts_counter of the author when update_post_counter is called' do
       expect { subject.update_post_counter }.to change { user.posts_counter }.by(1)
     end
-  end
-
+    
     it 'returns the five most recent comments' do
       10.times do |i|
         Comment.create(
