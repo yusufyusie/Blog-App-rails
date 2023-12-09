@@ -35,7 +35,7 @@ RSpec.describe Post, type: :model do
       Post.new(
           title: 'Test Post',
           text: 'This is a test post',
-          user: user,
+          user:,
           comment_counter: 0,
           likes_counter: 0
       )
@@ -49,8 +49,8 @@ RSpec.describe Post, type: :model do
       10.times do |i|
         Comment.create(
             text: "This is the text for comment #{i}",
-            post: subject,
-            user: user
+            post:,
+            user:
         )
       end
 
