@@ -5,7 +5,6 @@ class Post < ApplicationRecord
 
   # Updates the posts counter for a user
   private
-  
   def update_user_posts_counter
     author.update(posts_counter: author.posts.count)
   end
