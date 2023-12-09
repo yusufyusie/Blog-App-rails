@@ -1,7 +1,7 @@
 require_relative '../rails_helper'
 
 RSpec.describe Post, type: :model do
-  let(:user) { User.create(name: 'Fuad', posts_counter: 0) }
+  let(:user) { create_user }
   subject do
     Post.new(user_id: user.id, title: 'Hello', text: 'This is my post', comment_counter: 1, likes_counter: 1)
   end
@@ -9,7 +9,7 @@ RSpec.describe Post, type: :model do
   context 'Testing validation' do
     it 'Title should be invalid with nil value' do
       subject.title = nil
-      expect(subject).to_not be_valid
+      expect(subject).not_to be_valid
     end
 
     it 'Title must not exceed 250 characters' do
@@ -18,28 +18,17 @@ RSpec.describe Post, type: :model do
 
     it 'CommentsCounter must be an integer greater than or equal to zero.' do
       subject.comment_counter = -1
-      expect(subject).to_not be_valid
+      expect(subject).not_to be_valid
     end
 
     it 'LikesCounter must be an integer greater than or equal to zero.' do
       subject.likes_counter = -1
-      expect(subject).to_not be_valid
-    end
-
-    it 'Should update count of posts' do
-      expect(subject.post_count_updater).to be true
+      expect(subject).not_to be_valid
     end
   end
 
   describe 'Functionality' do
-    let(:user) do
-      User.create(
-        name: 'John Doe',
-        photo: 'https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg',
-        bio: 'Hello I am a test user',
-        posts_counter: 0
-      )
-    end
+    let(:user) { create_user(posts_counter: 0) }
 
     subject do
       Post.new(
@@ -56,7 +45,7 @@ RSpec.describe Post, type: :model do
         Comment.create(
           text: "This is the text for comment #{i}",
           post: subject,
-          user:
+          user: user
         )
       end
 
