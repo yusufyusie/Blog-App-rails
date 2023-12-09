@@ -2,6 +2,7 @@ require_relative '../rails_helper'
 
 RSpec.describe Post, type: :model do
   let(:user) { create_user }
+
   subject do
     Post.new(user_id: user.id, title: 'Hello', text: 'This is my post', comment_counter: 1, likes_counter: 1)
   end
@@ -16,12 +17,12 @@ RSpec.describe Post, type: :model do
       expect(subject.title.length).to be <= 250
     end
 
-    it 'CommentsCounter must be an integer greater than or equal to zero.' do
+    it 'CommentsCounter must be an integer greater than or equal to zero' do
       subject.comment_counter = -1
       expect(subject).not_to be_valid
     end
 
-    it 'LikesCounter must be an integer greater than or equal to zero.' do
+    it 'LikesCounter must be an integer greater than or equal to zero' do
       subject.likes_counter = -1
       expect(subject).not_to be_valid
     end
@@ -30,26 +31,26 @@ RSpec.describe Post, type: :model do
   describe 'Functionality' do
     let(:user) { create_user(posts_counter: 0) }
 
-    { subject do
+    subject do
       Post.new(
-        title: 'Test Post',
-        text: 'This is a test post',
-        user:,
-        comment_counter: 0,
-        likes_counter: 0
-      )}
+          title: 'Test Post',
+          text: 'This is a test post',
+          user: user,
+          comment_counter: 0,
+          likes_counter: 0
+      )
     end
 
     it 'increases the posts_counter of the author when update_post_counter is called' do
       expect { subject.update_post_counter }.to change { user.posts_counter }.by(1)
     end
-    
+
     it 'returns the five most recent comments' do
       10.times do |i|
         Comment.create(
-          text: "This is the text for comment #{i}",
-          post: subject,
-          user: user
+            text: "This is the text for comment #{i}",
+            post: subject,
+            user: user
         )
       end
 
