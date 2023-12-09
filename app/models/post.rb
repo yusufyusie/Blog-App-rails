@@ -7,7 +7,7 @@ class Post < ApplicationRecord
   validates :comment_counter, numericality: { greater_than_or_equal_to: 0 }
   validates :likes_counter, numericality: { greater_than_or_equal_to: 0 }
 
-  # Updates the posts counter for a user
+  # Updates the posts counter for the user
   private
 
   def update_user_posts_counter
