@@ -30,7 +30,7 @@ RSpec.describe Post, type: :model do
   describe 'Functionality' do
     let(:user) { create_user(posts_counter: 0) }
 
-    subject do
+    { subject do
       Post.new(
         title: 'Test Post',
         text: 'This is a test post',
@@ -38,7 +38,11 @@ RSpec.describe Post, type: :model do
         comment_counter: 0,
         likes_counter: 0
       )
+    }
+    it 'increases the posts_counter of the author when update_post_counter is called' do
+      expect { subject.update_post_counter }.to change { user.posts_counter }.by(1)
     end
+  end
 
     it 'returns the five most recent comments' do
       10.times do |i|
